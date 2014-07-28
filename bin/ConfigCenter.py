@@ -217,9 +217,9 @@ class ConfigCenter(gtk.VBox):
 			for path in paths:
 				host=model[path][1]
 				role=model[path][3]
-				conn=sqlite3.connect('db/server.db')	
+				conn=sqlite3.connect('db/config.db')	
 				c=conn.cursor()
-				c.execute("delete from server where hostname='%s' and role='%s'"%(host,role))
+				c.execute("delete from config where hostname='%s' " % (host))
 				conn.commit()
 				conn.close()
 				model.remove(model.get_iter(path))		

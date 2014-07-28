@@ -104,25 +104,26 @@ class NewConfig(gtk.Window):
 		username=self.username.get_text()
 		password=self.password.get_text()
 
-		self.saveTodb([hostname,port,username,password])
+		self.saveTodb([hostname,port,username,password,'','','',''])
 		self.liststore.append([False,hostname,'--','--','--','--','打开终端',1])
 		
 		self.window.destroy()
 	def saveTodb(self,data):
 		conn=sqlite3.connect('db/config.db')
 		c=conn.cursor()
-		c.execute('''
-			create table if not exists config
-			(hostname text,port text,username text,
-			password text，hostname2 text,runlevel text,
-			sshport text,rootpasswd,text)
+		c.execute(
+			'''
+			create table if not exists config 
+			(hostname text,port test,username text,
+			password test,servername text,runlevel text,
+			sshport text,rootpasswd text)
 			'''
 		)
 		c.execute('''
-			insert into config(hostname,port,username,password)
-			values("%s","%s","%s","%s")
-			''' % (data[0],data[1],data[2],data[3])
-				)
+			insert into config(hostname,port,username,password,servername,runlevel,sshport,rootpasswd)
+			values("%s","%s","%s","%s","%s","%s","%s","%s")
+			''' % (data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7])
+		)
 		conn.commit()
 		conn.close()
 	def msg(self,text):

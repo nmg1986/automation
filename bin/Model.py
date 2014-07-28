@@ -25,7 +25,7 @@ def CreateConfigModel():
 	if  os.path.isfile('db/config.db'):
 		conn=sqlite3.connect('db/config.db')
 		cursor=conn.cursor()
-		cursor.execute('select hostname,port,username,password,hostname2,runlevel,sshport,rootpasswd from config') 
+		cursor.execute('select hostname,port,username,password,servername,runlevel,sshport,rootpasswd from config') 
 		while True:
 			data=cursor.fetchone()
 			if data is None:
@@ -38,7 +38,7 @@ def CreateConfigModel():
 			runlevel=str(data[5])
 			sshport=str(data[6])
 			rootpasswd=str(data[7])
-			liststore.append([False,hostname,hostname2,runlevel,sshport,rootpasswd,'terminal',1])
+			liststore.append([False,hostname,hostname2,runlevel,sshport,rootpasswd,'打开终端',1])
 		cursor.close()
 		conn.close()
 			
